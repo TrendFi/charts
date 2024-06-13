@@ -134,6 +134,3 @@ yarn-error.log*
 
 # IDEs
 /.idea
-
-# node_modules 
-/node_modules 
