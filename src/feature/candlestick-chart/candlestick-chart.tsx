@@ -66,16 +66,23 @@ export type Options = {
   studySizes?: Array<number | string>;
 };
 
-export type Dataset = {
+export interface Dataset {
   /**
    * Each row represents a data point.
    */
   rows: Array<{ date: Date, open: number, high: number, low: number, close: number, volume: number }>;
 }
 
+export interface PriceMonitoringBounds {
+  minValidPrice: number;
+  maxValidPrice: number;
+  referencePrice: number;
+}
+
 export type CandlestickChartProps = {
   /** Responsible for fetching data */
   dataset: Dataset;
+  priceMonitoringBounds: PriceMonitoringBounds[];
   initialViewport?: Viewport;
   interval: Interval;
   options?: Options;
@@ -90,6 +97,7 @@ export const CandlestickChart = forwardRef(
   (
     {
       dataset,
+      priceMonitoringBounds,
       interval,
       options = {
         chartType: ChartType.CANDLE,
@@ -156,9 +164,6 @@ export const CandlestickChart = forwardRef(
     const [loading, setLoading] = useState(true);
 
     // Wait for data source onReady call before showing content
-    const { ready: dataSourceInitializing, configuration } =
-      useOnReady(dataSource);
-
     const specification = useMemo(
       () =>
         constructTopLevelSpec(
@@ -167,15 +172,15 @@ export const CandlestickChart = forwardRef(
           colors,
           overlays,
           studies,
-          configuration?.priceMonitoringBounds,
+          priceMonitoringBounds
         ),
       [
-        data,
+        dataset.rows,
         chartType,
         colors,
         overlays,
         studies,
-        configuration?.priceMonitoringBounds,
+        priceMonitoringBounds
       ],
     );
 
@@ -295,7 +300,7 @@ export const CandlestickChart = forwardRef(
             height={300}
             decimalPlaces={2}
             positionDecimalPlaces={2}
-            priceMonitoringBounds={configuration?.priceMonitoringBounds ?? []}
+            priceMonitoringBounds={priceMonitoringBounds ?? []}
             scenegraph={scenegraph}
             interval={internalInterval}
             initialViewport={viewport}

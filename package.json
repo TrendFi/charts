@@ -1,6 +1,6 @@
 {
   "name": "layer1report-charts",
-  "version": "1.24.02",
+  "version": "1.24.04",
   "description": "A React component library for visualising historical and streaming financial market data",
   "main": "./dist/legacy.js",
   "types": "./dist/types/index.d.ts",
