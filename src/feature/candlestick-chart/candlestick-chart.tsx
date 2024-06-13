@@ -41,7 +41,7 @@ import {
 import { Colors, getColors } from "./helpers";
 import { useGetDimensions, useOnReady } from "./hooks";
 
-const noop = () => {};
+const noop = () => { };
 
 export type Options = {
   chartType?: ChartType;
@@ -107,9 +107,9 @@ export const CandlestickChart = forwardRef(
       overlays = [],
       simple = false,
       initialNumCandlesToDisplay:
-        initialNumCandles = INITIAL_NUM_CANDLES_TO_DISPLAY,
+      initialNumCandles = INITIAL_NUM_CANDLES_TO_DISPLAY,
       initialNumCandlesToFetch:
-        initialNumCandlesToFetch = INITIAL_NUM_CANDLES_TO_FETCH,
+      initialNumCandlesToFetch = INITIAL_NUM_CANDLES_TO_FETCH,
       notEnoughDataText,
       studySize = "50%",
       studySizes = [],
@@ -219,7 +219,7 @@ export const CandlestickChart = forwardRef(
         await query(
           new Date(
             new Date().getTime() -
-              1000 * 60 * getSubMinutes(interval, initialNumCandlesToFetch),
+            1000 * 60 * getSubMinutes(interval, initialNumCandlesToFetch),
           ),
           new Date(),
           interval,
@@ -228,24 +228,13 @@ export const CandlestickChart = forwardRef(
 
         setInternalInterval(interval);
       };
-
-      function subscribe(interval: Interval) {
-        dataSource.subscribeData(interval, (datum) => {
-          setData((data) => mergeData([datum], data));
-        });
-      }
-
       if (!dataSourceInitializing) {
         const myDataSource = dataSource;
 
         // Initial data fetch
         fetchData(interval);
 
-        // Set up subscriptions
-        subscribe(interval);
-
         return () => {
-          myDataSource.unsubscribeData();
           setData([]);
         };
       }
@@ -256,29 +245,6 @@ export const CandlestickChart = forwardRef(
       interval,
       query,
     ]);
-
-    // React to streaming annotations changes
-    useEffect(() => {
-      function subscribe() {
-        if (dataSource.subscribeAnnotations && !simple) {
-          dataSource.subscribeAnnotations((annotations) => {
-            setAnnotations(annotations);
-          });
-        }
-      }
-
-      if (!dataSourceInitializing) {
-        const myDataSource = dataSource;
-
-        subscribe();
-
-        return () => {
-          myDataSource.unsubscribeAnnotations &&
-            myDataSource.unsubscribeAnnotations();
-          setAnnotations([]);
-        };
-      }
-    }, [dataSource, dataSourceInitializing, simple]);
 
     useEffect(() => {
       // Hack to ensure we pick up the changed css

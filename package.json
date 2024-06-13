@@ -1,5 +1,5 @@
 {
-  "name": "pennant",
+  "name": "l1r-pennant",
   "version": "1.17.0",
   "description": "A React component library for visualising historical and streaming financial market data",
   "main": "./dist/legacy.js",
@@ -10,14 +10,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/vegaprotocol/pennant.git"
+    "url": "https://github.com/Layer1Report/pennant.git"
   },
-  "author": "Vega <hi@vega.xyz>",
+  "author": "Layer1Report <support@layer1report.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vegaprotocol/pennant/issues"
+    "url": "https://github.com/Layer1Report/pennant/issues"
   },
-  "homepage": "https://github.com/vegaprotocol/pennant",
+  "homepage": "https://github.com/Layer1Report/pennant",
   "files": [
     "dist/*.js",
     "dist/*.mjs",
