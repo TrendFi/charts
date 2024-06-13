@@ -23,7 +23,7 @@ export interface DataSource {
   /**
    * Used by the charting library to initialize itself.
    */
-  onReady(): Promise<Configuration>;
+  // onReady(): Promise<Configuration>;
 
   /**
    * Used by the charting library to get historical data.
@@ -33,25 +33,25 @@ export interface DataSource {
   /**
    * Used by the charting library to create a subscription to streaming data.
    */
-  subscribeData(
-    interval: Interval,
-    onSubscriptionData: (datum: Candle) => void,
-  ): void;
+  // subscribeData(
+  //   interval: Interval,
+  //   onSubscriptionData: (datum: Candle) => void,
+  // ): void;
 
   /**
    * Used by the charting library to clean-up a subscription to streaming data.
    */
-  unsubscribeData(): void;
+  // unsubscribeData(): void;
 
   /**
    * Used by the charting library to create a subscription to streaming annotation data.
    */
-  subscribeAnnotations?(
-    onSubscriptionAnnotations: (annotations: Annotation[]) => void,
-  ): void;
+  // subscribeAnnotations?(
+  //   onSubscriptionAnnotations: (annotations: Annotation[]) => void,
+  // ): void;
 
   /**
    * Used by the charting library to clean-up a subscription to streaming annotation data.
    */
-  unsubscribeAnnotations?(): void;
+  // unsubscribeAnnotations?(): void;
 }
