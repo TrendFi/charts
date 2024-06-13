@@ -23,7 +23,7 @@ export interface DataSource {
   /**
    * Used by the charting library to initialize itself.
    */
-  // onReady(): Promise<Configuration>;
+  onReady(): Promise<Configuration>;
 
   /**
    * Used by the charting library to get historical data.

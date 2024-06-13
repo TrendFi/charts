@@ -20,7 +20,6 @@ import {
   Candle,
   ChartElement,
   ChartType,
-  DataSource,
   Interval,
   Overlay,
   Study,
@@ -40,6 +39,8 @@ import {
 
 import { Colors, getColors } from "./helpers";
 import { useGetDimensions, useOnReady } from "./hooks";
+import { ro } from "date-fns/locale";
+import { toPairs } from "lodash";
 
 const noop = () => { };
 
@@ -65,9 +66,16 @@ export type Options = {
   studySizes?: Array<number | string>;
 };
 
+export type Dataset = {
+  /**
+   * Each row represents a data point.
+   */
+  rows: Array<{ date: Date, open: number, high: number, low: number, close: number, volume: number }>;
+}
+
 export type CandlestickChartProps = {
   /** Responsible for fetching data */
-  dataSource: DataSource;
+  dataset: Dataset;
   initialViewport?: Viewport;
   interval: Interval;
   options?: Options;
@@ -81,7 +89,7 @@ export type CandlestickChartProps = {
 export const CandlestickChart = forwardRef(
   (
     {
-      dataSource,
+      dataset,
       interval,
       options = {
         chartType: ChartType.CANDLE,
@@ -139,28 +147,13 @@ export const CandlestickChart = forwardRef(
     const chartRef = useRef<ChartElement>(null!);
     const styleRef = useRef<HTMLDivElement>(null!);
     const listeners = useRef(dispatch("contextmenu"));
-    const [data, setData] = useState<Candle[]>([]);
+    const [data, setData] = useState(dataset);
     const [annotations, setAnnotations] = useState<Annotation[]>([]);
     const [internalInterval, setInternalInterval] = useState(interval);
     const [colors, setColors] = useState<Colors>(getColors(null));
 
     const dimensions = useGetDimensions(styleRef.current);
     const [loading, setLoading] = useState(true);
-
-    // Callback for fetching historical data
-    const query = useCallback(
-      async (from: Date, to: Date, interval: Interval, merge = true) => {
-        const newData = await dataSource.query(
-          interval,
-          from.toISOString(),
-          to.toISOString(),
-        );
-
-        setData((data) => mergeData(newData, merge ? data : []));
-        setLoading(false);
-      },
-      [dataSource],
-    );
 
     // Wait for data source onReady call before showing content
     const { ready: dataSourceInitializing, configuration } =
@@ -169,7 +162,7 @@ export const CandlestickChart = forwardRef(
     const specification = useMemo(
       () =>
         constructTopLevelSpec(
-          data,
+          dataset.rows,
           chartType,
           colors,
           overlays,
@@ -200,12 +193,12 @@ export const CandlestickChart = forwardRef(
           candleWidth,
           dimensions,
           pixelsToTime,
-          dataSource.decimalPlaces,
+          2,
           annotations,
         ),
       [
         annotations,
-        dataSource.decimalPlaces,
+        2,
         dimensions,
         specification,
         pixelsToTime,
@@ -215,35 +208,16 @@ export const CandlestickChart = forwardRef(
 
     // Initial data fetch and subscriptions
     useEffect(() => {
-      const fetchData = async (interval: Interval) => {
-        await query(
-          new Date(
-            new Date().getTime() -
-            1000 * 60 * getSubMinutes(interval, initialNumCandlesToFetch),
-          ),
-          new Date(),
-          interval,
-          false,
-        );
+      // Initial data fetch
+      setLoading(false);
+      setInternalInterval(interval);
 
-        setInternalInterval(interval);
+      return () => {
+        setData({ rows: [] });
       };
-      if (!dataSourceInitializing) {
-        const myDataSource = dataSource;
 
-        // Initial data fetch
-        fetchData(interval);
-
-        return () => {
-          setData([]);
-        };
-      }
     }, [
-      dataSource,
-      dataSourceInitializing,
-      initialNumCandlesToFetch,
       interval,
-      query,
     ]);
 
     useEffect(() => {
@@ -263,13 +237,6 @@ export const CandlestickChart = forwardRef(
         onViewportChanged(viewport);
       },
       [onViewportChanged],
-    );
-
-    const handleGetDataRange = useCallback(
-      (from: Date, to: Date, interval: Interval) => {
-        query(from, to, interval);
-      },
-      [query],
     );
 
     const handleClosePane = useCallback(
@@ -295,7 +262,7 @@ export const CandlestickChart = forwardRef(
     const viewport = useMemo(
       () =>
         initialViewport ?? {
-          date: data.length > 0 ? data[data.length - 1].date : new Date(),
+          date: new Date(),
           intervalWidth: 10,
         },
       [data, initialViewport],
@@ -326,8 +293,8 @@ export const CandlestickChart = forwardRef(
             ref={chartRef}
             width={400}
             height={300}
-            decimalPlaces={dataSource.decimalPlaces}
-            positionDecimalPlaces={dataSource.positionDecimalPlaces}
+            decimalPlaces={2}
+            positionDecimalPlaces={2}
             priceMonitoringBounds={configuration?.priceMonitoringBounds ?? []}
             scenegraph={scenegraph}
             interval={internalInterval}
@@ -340,7 +307,7 @@ export const CandlestickChart = forwardRef(
             studySizes={studySizes}
             drawThrottleMs={drawThrottleMs}
             onViewportChanged={handleViewportChanged}
-            onGetDataRange={handleGetDataRange}
+            onGetDataRange={noop}
             onClosePane={handleClosePane}
             onChangePane={onPaneChanged}
             onRemoveOverlay={handleRemoveOverlay}
