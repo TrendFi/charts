@@ -1,9 +1,9 @@
 import { COLORS } from "@util/misc";
 
 export interface Colors {
-  buyFill: string;
+  // buyFill: string;
   buyStroke: string;
-  sellFill: string;
+  // sellFill: string;
   sellStroke: string;
   backgroundSurface: string;
   textPrimary: string;
@@ -40,22 +40,24 @@ export function getColors(element: HTMLElement | null): Colors {
   const cssStyleDeclaration = element ? getComputedStyle(element) : null;
 
   return {
-    buyFill:
-      cssStyleDeclaration
-        ?.getPropertyValue("--pennant-color-buy-fill")
-        .trim() || "#16452d",
-    buyStroke:
-      cssStyleDeclaration
-        ?.getPropertyValue("--pennant-color-buy-stroke")
-        .trim() || "#26ff8a",
-    sellFill:
-      cssStyleDeclaration
-        ?.getPropertyValue("--pennant-color-sell-fill")
-        .trim() || "#800700",
-    sellStroke:
-      cssStyleDeclaration
-        ?.getPropertyValue("--pennant-color-sell-stroke")
-        .trim() || "#ff261a",
+    buyStroke: '#333333',
+    sellStroke: '#333333',
+    // buyFill:
+    //   cssStyleDeclaration
+    //     ?.getPropertyValue("--pennant-color-buy-fill")
+    //     .trim() || "#16452d",
+    // buyStroke:
+    //   cssStyleDeclaration
+    //     ?.getPropertyValue("--pennant-color-buy-stroke")
+    //     .trim() || "#26ff8a",
+    // sellFill:
+    //   cssStyleDeclaration
+    //     ?.getPropertyValue("--pennant-color-sell-fill")
+    //     .trim() || "#800700",
+    // sellStroke:
+    //   cssStyleDeclaration
+    //     ?.getPropertyValue("--pennant-color-sell-stroke")
+    //     .trim() || "#ff261a",
     textPrimary:
       cssStyleDeclaration
         ?.getPropertyValue("--pennant-font-color-base")

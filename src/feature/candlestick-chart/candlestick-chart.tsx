@@ -44,10 +44,17 @@ import { toPairs } from "lodash";
 
 const noop = () => { };
 
+export interface PriceMonitoringBounds {
+  minValidPrice: number;
+  maxValidPrice: number;
+  referencePrice: number;
+}
+
 export type Options = {
   chartType?: ChartType;
   overlays?: Overlay[];
   studies?: Study[];
+  priceMonitoringBounds?: PriceMonitoringBounds[];
   simple?: boolean;
   initialNumCandlesToDisplay?: number;
   initialNumCandlesToFetch?: number;
@@ -70,19 +77,12 @@ export interface Dataset {
   /**
    * Each row represents a data point.
    */
-  rows: Array<{ date: Date, open: number, high: number, low: number, close: number, volume: number }>;
-}
-
-export interface PriceMonitoringBounds {
-  minValidPrice: number;
-  maxValidPrice: number;
-  referencePrice: number;
+  rows: Array<{ date: Date, open: number, high: number, low: number, close: number, buy: boolean, sell: boolean, hold: boolean, volume: number }>;
 }
 
 export type CandlestickChartProps = {
   /** Responsible for fetching data */
   dataset: Dataset;
-  priceMonitoringBounds: PriceMonitoringBounds[];
   initialViewport?: Viewport;
   interval: Interval;
   options?: Options;
@@ -97,12 +97,12 @@ export const CandlestickChart = forwardRef(
   (
     {
       dataset,
-      priceMonitoringBounds,
       interval,
       options = {
         chartType: ChartType.CANDLE,
         studies: [],
         overlays: [],
+        priceMonitoringBounds: [],
         initialNumCandlesToDisplay: INITIAL_NUM_CANDLES_TO_DISPLAY,
         initialNumCandlesToFetch: INITIAL_NUM_CANDLES_TO_FETCH,
         studySize: "50%",
@@ -121,6 +121,7 @@ export const CandlestickChart = forwardRef(
       chartType = ChartType.CANDLE,
       studies = [],
       overlays = [],
+      priceMonitoringBounds = [],
       simple = false,
       initialNumCandlesToDisplay:
       initialNumCandles = INITIAL_NUM_CANDLES_TO_DISPLAY,

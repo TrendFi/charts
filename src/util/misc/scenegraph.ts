@@ -79,6 +79,7 @@ export function getBarConfig(
     base = d[y2];
   }
 
+  const dColor = d.sell ? '#aa5fff' : d.buy ? '#aa5fff' : d.hold ? '#24FF00' : '#FF5252'
   const strokesWidth = stroke && lineWidth ? lineWidth * 2 * pixelsToTime : 0;
   const calculatedPadding = Math.min(
     width * innerPadding,
@@ -90,8 +91,8 @@ export function getBarConfig(
     y: Math.max(d[y] as number, base),
     height: Math.abs(base - (d[y] as number)),
     width: width - calculatedPadding,
-    fill: fill,
-    stroke: stroke,
+    fill: dColor,
+    stroke: 'transparent',
     lineWidth: lineWidth ?? 1,
   };
 }
@@ -157,7 +158,6 @@ export function getTickConfig(
     x: d[x],
     y: d[y],
     width: width * (1 - PADDING_INNER),
-    color,
     orient,
   };
 }

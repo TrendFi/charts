@@ -92,14 +92,17 @@ function compileLayer(
       let cfg = {};
 
       if (markType === "bar") {
+        const dColor = d.sell ? '#FF5252' : d.buy ? '#24FF00' : d.hold ? '#24FF00' : '#FF5252'
         cfg = getBarConfig(
           d,
           encoding.x?.field!,
           encoding.y?.field!,
           encoding.y2?.field!,
           candleWidth,
-          getConditionalColor(encoding.fill)(d),
-          getConditionalColor(encoding.stroke)(d),
+          // getConditionalColor(encoding.fill)(d),
+          // getConditionalColor(encoding.stroke)(d),
+          dColor,
+          dColor,
           (encoding.strokeWidth as any)?.value ?? dimensions.strokeWidth,
           dimensions.innerPadding,
           dimensions.maxPaddingInPixels,
@@ -355,55 +358,55 @@ export function parse(
   return {
     panes: isVConcatSpec(specification)
       ? specification.vconcat.map((pane, paneIndex) => {
-          return {
-            id: pane.name ?? "",
-            renderableElements: parseLayer(
-              pane,
-              { values: newData },
-              specification.encoding ?? {},
-              candleWidth,
-              dimensions,
-              pixelsToTime,
-            ),
-            bounds: calculateScales(
-              pane,
-              newData,
-              extractYEncodingFields(pane),
-            ),
-            originalData: newData ?? [],
-            grid: new GridElement(),
-            axis: new YAxisElement(),
-            crosshair: new CrosshairElement(),
-            axisTooltip: new YAxisTooltipElement(decimalPlaces),
-            annotations:
-              paneIndex === 0
-                ? [
-                    new YAxisAnnotationElement(
-                      newData[newData.length - 1].close,
-                      decimalPlaces,
-                    ),
-                  ]
-                : [],
-            labels:
-              paneIndex === 0
-                ? [
-                    new LabelAnnotationHtmlElement({
-                      labels: annotations,
-                    }),
-                  ]
-                : [],
-            labelLines:
-              paneIndex === 0
-                ? [
-                    new LabelAnnotationElement({
-                      labels: annotations,
-                    }),
-                  ]
-                : [],
-            yEncodingFields: extractYEncodingFields(pane),
-            yDomain: extractYDomain(pane, newData), // FIXME: duplicate of bounds
-          };
-        })
+        return {
+          id: pane.name ?? "",
+          renderableElements: parseLayer(
+            pane,
+            { values: newData },
+            specification.encoding ?? {},
+            candleWidth,
+            dimensions,
+            pixelsToTime,
+          ),
+          bounds: calculateScales(
+            pane,
+            newData,
+            extractYEncodingFields(pane),
+          ),
+          originalData: newData ?? [],
+          grid: new GridElement(),
+          axis: new YAxisElement(),
+          crosshair: new CrosshairElement(),
+          axisTooltip: new YAxisTooltipElement(decimalPlaces),
+          annotations:
+            paneIndex === 0
+              ? [
+                new YAxisAnnotationElement(
+                  newData[newData.length - 1].close,
+                  decimalPlaces,
+                ),
+              ]
+              : [],
+          labels:
+            paneIndex === 0
+              ? [
+                new LabelAnnotationHtmlElement({
+                  labels: annotations,
+                }),
+              ]
+              : [],
+          labelLines:
+            paneIndex === 0
+              ? [
+                new LabelAnnotationElement({
+                  labels: annotations,
+                }),
+              ]
+              : [],
+          yEncodingFields: extractYEncodingFields(pane),
+          yDomain: extractYDomain(pane, newData), // FIXME: duplicate of bounds
+        };
+      })
       : [], // FIXME: If not a vconcat spec what should we do?
     xAxis: {
       id: "x-axis",
