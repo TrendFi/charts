@@ -92,7 +92,8 @@ function compileLayer(
       let cfg = {};
 
       if (markType === "bar") {
-        const dColor = d.sell ? '#FF5252' : d.buy ? '#24FF00' : d.hold ? '#24FF00' : d.short ? '#a855f6' : d.cover ? '#FF5252' : d.hold_short ? '#a855f6' : '#FF5252'
+        // const dColor = d.sell ? '#FF5252' : d.buy ? '#24FF00' : d.hold ? '#24FF00' : d.short ? '#a855f6' : d.cover ? '#FF5252' : d.hold_short ? '#a855f6' : '#FF5252'
+        const dColor = d.sell ? '#FF5252' : d.buy ? '#24FF00' : d.hold ? '#24FF00' : '#FF5252'
 
         cfg = getBarConfig(
           d,
