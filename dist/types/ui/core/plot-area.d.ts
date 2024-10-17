@@ -1,0 +1,33 @@
+import { RenderableElement, ScaleLinear, ScaleTime } from "@util/types";
+import { Colors } from "../../feature/candlestick-chart/helpers";
+export declare class PlotArea {
+    colors: Colors;
+    private _crosshair;
+    private ctx;
+    private _data;
+    private gridline;
+    private _labels;
+    private latestPriceCrosshair;
+    private latestPricePosition;
+    private _pixelRatio;
+    private position;
+    private _renderableElements;
+    private _xScale;
+    private _yEncodingFields;
+    private _yScale;
+    private isSimple;
+    constructor(x: ScaleTime, y: ScaleLinear, elements: RenderableElement[], originalData: any[], fields: string[], labels: RenderableElement[], isSimple: boolean, colors: Colors);
+    context(context: CanvasRenderingContext2D): this;
+    crosshair(pos: [Date | null, number | null]): this;
+    data(originalData: any[]): this;
+    draw(): void;
+    extent(bounds?: [Date, Date]): any[];
+    getIndex(offset: number): [number, Date] | null;
+    pixelRatio(ratio: number): this;
+    labels(elements: RenderableElement[]): this;
+    latestPrice(price: number | null): this;
+    renderableElements(elements: RenderableElement[]): this;
+    xScale(x: ScaleTime): this;
+    yEncodingFields(fields: string[]): this;
+    yScale(y: ScaleLinear): this;
+}

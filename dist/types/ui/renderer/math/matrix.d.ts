@@ -1,0 +1,30 @@
+import { Point, PointData } from "./point";
+import { Transform } from "./transform";
+export declare class Matrix {
+    a: number;
+    b: number;
+    c: number;
+    d: number;
+    tx: number;
+    ty: number;
+    array: Float32Array | null;
+    constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number);
+    fromArray(array: number[]): void;
+    set(a: number, b: number, c: number, d: number, tx: number, ty: number): this;
+    toArray(transpose: boolean, out?: Float32Array): Float32Array;
+    apply<P extends PointData = Point>(pos: PointData, newPos?: P): P;
+    applyInverse<P extends PointData = Point>(pos: PointData, newPos?: P): P;
+    translate(x: number, y: number): this;
+    scale(x: number, y: number): this;
+    rotate(angle: number): this;
+    append(matrix: Matrix): this;
+    setTransform(x: number, y: number, pivotX: number, pivotY: number, scaleX: number, scaleY: number, rotation: number, skewX: number, skewY: number): this;
+    prepend(matrix: Matrix): this;
+    decompose(transform: Transform): Transform;
+    invert(): this;
+    identity(): this;
+    clone(): Matrix;
+    copyTo(matrix: Matrix): Matrix;
+    copyFrom(matrix: Matrix): this;
+    static get IDENTITY(): Matrix;
+}

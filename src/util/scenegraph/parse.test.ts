@@ -78,9 +78,9 @@ test("candlestick chart with study", () => {
               fill: {
                 condition: {
                   test: { field: "open", lt: "close" },
-                  value: colors.buyFill,
+                  value: '#000',
                 },
-                value: colors.sellFill,
+                value: '#000',
               },
               stroke: {
                 condition: {
@@ -159,9 +159,9 @@ test("recursively parse a layer", () => {
           color: {
             condition: {
               test: { field: "open", lt: "close" },
-              value: colors.buyFill,
+              value: '#000',
             },
-            value: colors.sellFill,
+            value: '#000',
           },
         },
         layer: [
@@ -186,9 +186,9 @@ test("recursively parse a layer", () => {
               stroke: {
                 condition: {
                   test: { field: "open", lt: "close" },
-                  value: colors.buyFill,
+                  value: '#000',
                 },
-                value: colors.sellFill,
+                value: '#000',
               },
             },
           },

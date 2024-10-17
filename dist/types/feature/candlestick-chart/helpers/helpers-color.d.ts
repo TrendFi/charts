@@ -1,0 +1,33 @@
+export interface Colors {
+    buyStroke: string;
+    sellStroke: string;
+    backgroundSurface: string;
+    textPrimary: string;
+    textSecondary: string;
+    emphasis100: string;
+    emphasis300: string;
+    emphasis400: string;
+    emphasis500: string;
+    emphasis900: string;
+    vegaGreen: string;
+    vegaYellow: string;
+    vegaOrange: string;
+    accent1: string;
+    accent2: string;
+    accent3: string;
+    accent4: string;
+    accent5: string;
+    accent6: string;
+    eldarRayBearPower: string;
+    eldarRayBullPower: string;
+    forceIndex: string;
+    macdDivergenceBuy: string;
+    macdDivergenceSell: string;
+    macdSignal: string;
+    macdMacd: string;
+    relativeStrengthIndex: string;
+    volumeBuy: string;
+    volumeSell: string;
+}
+export declare function getColors(element: HTMLElement | null): Colors;
+export declare function getAccentColor(n: number): keyof Colors;

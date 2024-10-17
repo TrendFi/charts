@@ -1,0 +1,13 @@
+import { ComponentStory } from "@storybook/react";
+import { LineChart } from "./line-chart";
+declare const _default: import("@storybook/types").ComponentAnnotations<import("@storybook/react/dist/types-0a347bb9").R, import("./line-chart").LineChartProps<unknown>>;
+export default _default;
+export declare const SingleSeries: ComponentStory<typeof LineChart>;
+export declare const MultipleSeries: ComponentStory<typeof LineChart>;
+export declare const MortalityRates: ComponentStory<typeof LineChart>;
+export declare const FTSE: ComponentStory<typeof LineChart>;
+export declare const CustomTooltip: ComponentStory<typeof LineChart>;
+export declare const Vega1: ComponentStory<typeof LineChart>;
+export declare const Vega2: ComponentStory<typeof LineChart>;
+export declare const VectorVals: ComponentStory<typeof LineChart>;
+export declare const NonInteractive: ComponentStory<typeof LineChart>;

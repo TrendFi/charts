@@ -1,0 +1,12 @@
+import { ComponentStory } from "@storybook/react";
+import { AreaChart } from "./area-chart";
+declare const _default: import("@storybook/types").ComponentAnnotations<import("@storybook/react/dist/types-0a347bb9").R, import("./area-chart").AreaChartProps<unknown>>;
+export default _default;
+export declare const SingleSeries: ComponentStory<typeof AreaChart>;
+export declare const MultipleSeries: ComponentStory<typeof AreaChart>;
+export declare const MortalityRates: ComponentStory<typeof AreaChart>;
+export declare const FTSE: ComponentStory<typeof AreaChart>;
+export declare const CustomTooltip: ComponentStory<typeof AreaChart>;
+export declare const Vega1: ComponentStory<typeof AreaChart>;
+export declare const Vega2: ComponentStory<typeof AreaChart>;
+export declare const NonInteractive: ComponentStory<typeof AreaChart>;

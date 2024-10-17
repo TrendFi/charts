@@ -1,0 +1,16 @@
+import { Story } from "@storybook/react";
+import { DepthChartProps } from "./depth-chart";
+declare const _default: import("@storybook/types").ComponentAnnotations<import("@storybook/react/dist/types-0a347bb9").R, import("@storybook/types").Args>;
+export default _default;
+export declare const Binance: Story<DepthChartProps>;
+export declare const AAPL: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;
+export declare const ETHBTC: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;
+export declare const UNIDAI: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;
+export declare const BTCUSD: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;
+export declare const SinglePriceLevel: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;
+export declare const LeftSided: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;
+export declare const RightSided: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;
+export declare const NoData: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;
+export declare const InitialZoom: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;
+export declare const FractionalVolume: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;
+export declare const UnsortedPriceLevels: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react/dist/types-0a347bb9").R, DepthChartProps>;

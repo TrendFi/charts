@@ -136,7 +136,7 @@ function constructMainLayerSpec(
             fill: {
               condition: {
                 test: { field: "open", lt: "close" },
-                value: colors.buyFill,
+                value: '#000',
               },
               value: colors.sellStroke,
             },

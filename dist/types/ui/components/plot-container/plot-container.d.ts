@@ -1,0 +1,30 @@
+/// <reference types="react" />
+import "./plot-container.css";
+import "../../../lib/d3fc-element";
+import { Bounds, Interval, PlotContainerElement, PriceMonitoringBounds, Scenegraph, Viewport } from "@util/types";
+import { Colors } from "../../../feature/candlestick-chart/helpers";
+export type PlotContainerProps = {
+    width: number;
+    height: number;
+    decimalPlaces: number;
+    positionDecimalPlaces: number;
+    priceMonitoringBounds: PriceMonitoringBounds[];
+    scenegraph: Scenegraph;
+    interval: Interval;
+    initialViewport: Viewport;
+    overlays: string[];
+    simple: boolean;
+    initialNumCandles: number;
+    colors: Colors;
+    studySize: number | string;
+    studySizes: Array<number | string>;
+    drawThrottleMs: number;
+    onBoundsChanged?: (bounds: Bounds) => void;
+    onViewportChanged?: (viewport: Viewport) => void;
+    onRightClick?: (event: any) => void;
+    onGetDataRange?: (from: Date, to: Date, interval: Interval) => void;
+    onClosePane: (id: string) => void;
+    onChangePane: (sizes: number[]) => void;
+    onRemoveOverlay: (id: string) => void;
+};
+export declare const PlotContainer: import("react").ForwardRefExoticComponent<PlotContainerProps & import("react").RefAttributes<PlotContainerElement>>;
