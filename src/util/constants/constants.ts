@@ -20,9 +20,9 @@ export const DEFAULT_INTERVAL_WIDTH = 10;
 export const MIN_ZOOM = 0.1;
 export const MAX_ZOOM = 5;
 export const LABEL_ANNOTATION_HEIGHT = 22;
-export const DATE_FORMAT = "MMM dd, yyyy";
+export const DATE_FORMAT = "MMM dd yyyy";
 
 // Axes
-export const MIN_NUM_TICKS = 3;
+export const MIN_NUM_TICKS = 10;
 export const TICK_LABEL_FONT = `"Roboto Mono", monospace`;
 export const TICK_LABEL_FONT_SIZE = 10;

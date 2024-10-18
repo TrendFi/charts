@@ -13,8 +13,8 @@ export declare function getBarConfig(d: any, x: string, y: string, y2: string, w
     y: number;
     height: number;
     width: number;
-    fill: string;
-    stroke: string;
+    fill: string | null;
+    stroke: string | null;
     lineWidth: number;
 };
 export declare function getLineConfig(data: any, x: string, y: string, color: string | Gradient | undefined): {

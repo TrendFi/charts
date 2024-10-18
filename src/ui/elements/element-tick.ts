@@ -40,6 +40,7 @@ export class TickElement implements PositionalElement {
     ctx.strokeStyle = this.color;
     ctx.lineCap = "butt";
     ctx.lineWidth = 2 / pixelRatio;
+    ctx.lineWidth = 0;
     ctx.stroke();
     ctx.closePath();
   }

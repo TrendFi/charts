@@ -70,12 +70,12 @@ export const PaneView = forwardRef<HTMLDivElement, PaneViewProps>(
         <d3fc-canvas
           class="y-axis"
           use-device-pixel-ratio
-          style={{ width: simple ? 0 : "100%" }}
+          style={{ width: "100%" }}
         />
         <d3fc-svg
           class="y-axis-interaction"
           style={{
-            width: simple ? 0 : `${Y_AXIS_WIDTH}px`,
+            width: `${Y_AXIS_WIDTH}px`,
           }}
         />
         {pane.id !== "main" && !simple && (
@@ -98,7 +98,7 @@ export const PaneView = forwardRef<HTMLDivElement, PaneViewProps>(
         )}
         <div
           className="pane__info-overlay"
-          style={{ alignItems: simple ? "flex-end" : "flex-start" }}
+          style={{ alignItems: "flex-start" }}
         >
           <IndicatorInfo
             title={studyInfoFields[simple ? "simple" : pane.id].label}

@@ -13,8 +13,8 @@ export const XAxisView = forwardRef<HTMLDivElement, XAxisViewProps>(
         ref={ref}
         className="x-axis-container"
         style={{
-          height: simple ? 0 : "24px",
-          visibility: simple ? "hidden" : "visible",
+          height: "24px",
+          visibility: "visible",
         }}
       >
         <d3fc-canvas class="x-axis" use-device-pixel-ratio />

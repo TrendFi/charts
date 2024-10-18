@@ -80,7 +80,7 @@ export function getBarConfig(
   }
 
   // const dColor = d.sell ? '#aa5fff' : d.buy ? '#aa5fff' : d.hold ? '#24FF00' : '#FF5252'
-  const dColor = d.sell ? '#FF5252' : d.buy ? '#24FF00' : d.hold ? '#24FF00' : d.short ? '#a855f6' : d.cover ? '#FF5252' : d.hold_short ? '#a855f6' : '#FF5252'
+  // const dColor = d.sell ? '#FF5252' : d.buy ? '#24FF00' : d.hold ? '#24FF00' : d.short ? '#a855f6' : d.cover ? '#FF5252' : d.hold_short ? '#a855f6' : '#FF5252'
   
   const strokesWidth = stroke && lineWidth ? lineWidth * 2 * pixelsToTime : 0;
   const calculatedPadding = Math.min(
@@ -93,8 +93,8 @@ export function getBarConfig(
     y: Math.max(d[y] as number, base),
     height: Math.abs(base - (d[y] as number)),
     width: width - calculatedPadding,
-    fill: dColor,
-    stroke: 'transparent',
+    fill: fill,
+    stroke: stroke,
     lineWidth: lineWidth ?? 1,
   };
 }
