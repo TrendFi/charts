@@ -1,6 +1,6 @@
 {
   "name": "trendfi-charts",
-  "version": "15.01.26",
+  "version": "15.01.27",
   "description": "A React component library for visualising historical and streaming financial market data",
   "main": "./dist/legacy.js",
   "types": "./dist/types/index.d.ts",

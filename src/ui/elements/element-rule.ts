@@ -96,7 +96,7 @@ export class RuleElement implements PositionalElement {
     if (this.short) {
       ctx.fillStyle = "#a855f6";
       ctx.beginPath();
-      ctx.arc(x, y + 6, pixelWidth / 2, 0, Math.PI * 2, true);
+      ctx.arc(x, y2 - 6, pixelWidth / 2, 0, Math.PI * 2, true);
       ctx.closePath();
       ctx.fill();
     }
@@ -105,10 +105,9 @@ export class RuleElement implements PositionalElement {
     if (this.cover) {
       ctx.fillStyle = "#FF2525";
       ctx.beginPath();
-      ctx.arc(x, y2 - 6, pixelWidth / 2, 0, Math.PI * 2, true);
+      ctx.arc(x, y + 6, pixelWidth / 2, 0, Math.PI * 2, true);
       ctx.closePath();
       ctx.fill();
     }
-
   }
 }
