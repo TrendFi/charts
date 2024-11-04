@@ -1,19 +1,19 @@
 {
-  "name": "layer1report-charts",
-  "version": "1.24.45",
+  "name": "trendfi-charts",
+  "version": "15.01.23",
   "description": "A React component library for visualising historical and streaming financial market data",
   "main": "./dist/legacy.js",
   "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Layer1Report/charts.git"
+    "url": "https://github.com/TrendFi/charts.git"
   },
-  "author": "Layer1Report <support@layer1report.com>",
+  "author": "TrendFi <support@trend.fi>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Layer1Report/charts/issues"
+    "url": "https://github.com/TrendFi/charts/issues"
   },
-  "homepage": "https://github.com/Layer1Report/charts",
+  "homepage": "https://github.com/TrendFi/charts",
   "files": [
     "dist/*.js",
     "dist/*.mjs",

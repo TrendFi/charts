@@ -13,11 +13,11 @@ export type Color = string;
 
 type BaseValueRef<T> =
   | {
-      value: T | null;
-    }
+    value: T | null;
+  }
   | {
-      field: Field;
-    };
+    field: Field;
+  };
 
 interface BaseGradient {
   gradient: "linear";
@@ -39,14 +39,14 @@ type ColorValueRef =
   | BaseValueRef<Color>
   | { value: LinearGradient }
   | {
-      gradient: Field;
-      start?: number[];
-      stop?: number[];
-      count?: number;
-    }
+    gradient: Field;
+    start?: number[];
+    stop?: number[];
+    count?: number;
+  }
   | {
-      color: Color;
-    };
+    color: Color;
+  };
 
 export interface MarkDef {
   type: string | Mark;

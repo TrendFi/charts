@@ -52,10 +52,12 @@ export interface PriceMonitoringBounds {
 
 export type Options = {
   chartType?: ChartType;
+  showWeekends?: boolean;
   overlays?: Overlay[];
   studies?: Study[];
   priceMonitoringBounds?: PriceMonitoringBounds[];
   simple?: boolean;
+  interaction?: boolean;
   initialNumCandlesToDisplay?: number;
   initialNumCandlesToFetch?: number;
   notEnoughDataText?: React.ReactNode;
@@ -123,6 +125,7 @@ export const CandlestickChart = forwardRef(
       overlays = [],
       priceMonitoringBounds = [],
       simple = false,
+      interaction = true,
       initialNumCandlesToDisplay:
       initialNumCandles = INITIAL_NUM_CANDLES_TO_DISPLAY,
       initialNumCandlesToFetch:
@@ -307,6 +310,7 @@ export const CandlestickChart = forwardRef(
             initialViewport={viewport}
             overlays={overlays}
             simple={simple}
+            interaction={interaction}
             initialNumCandles={initialNumCandles}
             colors={colors}
             studySize={studySize}

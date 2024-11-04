@@ -21,6 +21,9 @@ import {
   YAxisTooltipElement,
 } from "@ui/elements";
 import {
+  Indicator,
+} from "@ui/display-objects";
+import {
   calculateScales,
   createElement,
   getAreaConfig,
@@ -87,49 +90,54 @@ function compileLayer(
     return [createElement("line", cfg)];
   }
 
-  return data?.values
-    ?.map((d: any) => {
-      let cfg = {};
+  return data?.values?.map((d: any) => {
+    let cfg = {};
+    const dColor = d.sell ? '#FF5252' : d.buy ? '#24FF00' : d.hold ? '#24FF00' : d.short ? '#a855f6' : d.cover ? '#FF2525' : d.hold_short ? '#a855f6' : '#FF5252'
 
-      if (markType === "bar") {
-        const dColor = d.sell ? '#FF5252' : d.buy ? '#24FF00' : d.hold ? '#24FF00' : '#FF5252'
-        cfg = getBarConfig(
-          d,
-          encoding.x?.field!,
-          encoding.y?.field!,
-          encoding.y2?.field!,
-          candleWidth,
-          // getConditionalColor(encoding.fill)(d),
-          // getConditionalColor(encoding.stroke)(d),
-          dColor,
-          dColor,
-          (encoding.strokeWidth as any)?.value ?? dimensions.strokeWidth,
-          dimensions.innerPadding,
-          dimensions.maxPaddingInPixels,
-          pixelsToTime,
-        );
-      } else if (markType === "rule") {
-        cfg = getRuleConfig(
-          d,
-          encoding.x?.field!,
-          encoding.x2?.field!,
-          encoding.y?.field!,
-          encoding.y2?.field!,
-          getConditionalColor(encoding?.color)(d),
-        );
-      } else if (markType === "tick") {
-        cfg = getTickConfig(
-          d,
-          encoding.x?.field!,
-          encoding.y?.field!,
-          candleWidth,
-          getConditionalColor(encoding?.color)(d),
-          (mark as MarkDef).orient ?? "left", // FIXME: Type this correctly
-        );
-      }
+    if (markType === "bar") {
+      cfg = getBarConfig(
+        d,
+        encoding.x?.field!,
+        encoding.y?.field!,
+        encoding.y2?.field!,
+        candleWidth,
+        // getConditionalColor(encoding.fill)(d),
+        // getConditionalColor(encoding.stroke)(d),
+        dColor,
+        dColor,
+        (encoding.strokeWidth as any)?.value ?? dimensions.strokeWidth,
+        dimensions.innerPadding,
+        dimensions.maxPaddingInPixels,
+        pixelsToTime,
+      );
 
-      return createElement((markType as any) ?? "bar", cfg);
-    })
+    } else if (markType === "rule") {
+      cfg = getRuleConfig(
+        d,
+        d.buy,
+        d.sell,
+        encoding.x?.field!,
+        encoding.x2?.field!,
+        encoding.y?.field!,
+        encoding.y2?.field!,
+        dColor,
+        (encoding.strokeWidth as any)?.value ?? dimensions.strokeWidth,
+        dColor,
+        // getConditionalColor(encoding?.color)(d),
+      );
+    } else if (markType === "tick") {
+      cfg = getTickConfig(
+        d,
+        encoding.x?.field!,
+        encoding.y?.field!,
+        candleWidth,
+        getConditionalColor(encoding?.color)(d),
+        (mark as MarkDef).orient ?? "left", // FIXME: Type this correctly
+      );
+    }
+
+    return createElement((markType as any) ?? "bar", cfg);
+  })
     .filter((d) => d.x !== undefined);
 }
 
@@ -312,7 +320,7 @@ export function parse(
           {
             const indicatorData = indicatorMovingAverage<Candle>().value(
               (datum) => datum.close,
-            )(data);
+            ).period(50)(data);
 
             newData = newData.map((d, i) => ({
               ...d,

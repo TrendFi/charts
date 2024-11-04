@@ -22,6 +22,7 @@ export type PaneViewProps = {
   overlays: string[];
   pane: Pane;
   simple: boolean;
+  interaction: boolean;
   onClosePane: (id: string) => void;
   onRemoveOverlay: (id: string) => void;
 };
@@ -38,6 +39,7 @@ export const PaneView = forwardRef<HTMLDivElement, PaneViewProps>(
       overlays,
       pane,
       simple,
+      interaction,
       onClosePane,
       onRemoveOverlay,
     },
@@ -64,8 +66,8 @@ export const PaneView = forwardRef<HTMLDivElement, PaneViewProps>(
         onMouseOver={() => setShowPaneControls(pane.id)}
         onMouseOut={() => setShowPaneControls(null)}
       >
-        <d3fc-canvas class="plot-area" use-device-pixel-ratio />
-        {!simple && <d3fc-svg class="plot-area-interaction" />}
+        <d3fc-canvas class={`plot-area ${simple && 'simple-plot-area'}`} use-device-pixel-ratio />
+        {!simple && interaction && <d3fc-svg class="plot-area-interaction" />}
         <div className="plot-area-annotations" />
         <d3fc-canvas
           class="y-axis"
@@ -78,7 +80,7 @@ export const PaneView = forwardRef<HTMLDivElement, PaneViewProps>(
             width: simple ? 0 : `${Y_AXIS_WIDTH}px`,
           }}
         />
-        {pane.id !== "main" && !simple && (
+        {pane.id !== "main" && (!simple && interaction) && (
           <div
             className="pane__close-button-wrapper"
             style={{
@@ -101,8 +103,8 @@ export const PaneView = forwardRef<HTMLDivElement, PaneViewProps>(
           style={{ alignItems: simple ? "flex-end" : "flex-start" }}
         >
           <IndicatorInfo
-            title={studyInfoFields[simple ? "simple" : pane.id].label}
-            info={studyInfoFields[simple ? "simple" : pane.id].fields.map(
+            title={studyInfoFields[!interaction ? "simple" : pane.id].label}
+            info={studyInfoFields[!interaction ? "simple" : pane.id].fields.map(
               (field) => {
                 const value = getStudyInfoFieldValue(
                   pane.originalData,

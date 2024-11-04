@@ -11,7 +11,7 @@
   --pennant-color-gray-400: #8b919e;
   --pennant-color-gray-500: #6b7280;
   --pennant-color-gray-600: #5d636f;
-  --pennant-color-gray-700: #4f545f;
+  --pennant-color-gray-700: #242424;
   --pennant-color-gray-800: #41454e;
   --pennant-color-gray-900: #333333;
   --pennant-color-gray-950: #222531;
@@ -151,9 +151,9 @@
   --pennant-font-family-base: "Helvetica neue", "Helvetica", Arial, sans-serif;
   --pennant-font-family-monospace: "Roboto Mono", monospace;
 
-  --pennant-font-size-base: 12px;
-  --pennant-font-size-monospace: 12px;
-  --pennant-font-size-annotation: 14px;
+  --pennant-font-size-base: 11px;
+  --pennant-font-size-monospace: 11px;
+  --pennant-font-size-annotation: 12px;
 
   --pennant-font-weight-normal: 400;
 

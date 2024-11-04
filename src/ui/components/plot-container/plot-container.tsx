@@ -40,6 +40,7 @@ export type PlotContainerProps = {
   initialViewport: Viewport;
   overlays: string[];
   simple: boolean;
+  interaction: boolean;
   initialNumCandles: number;
   colors: Colors;
   studySize: number | string;
@@ -68,15 +69,16 @@ export const PlotContainer = forwardRef<
       priceMonitoringBounds,
       overlays,
       simple,
+      interaction,
       initialNumCandles,
       colors,
       studySize,
       studySizes,
       drawThrottleMs,
-      onViewportChanged = () => {},
-      onBoundsChanged = () => {},
-      onRightClick = () => {},
-      onGetDataRange = () => {},
+      onViewportChanged = () => { },
+      onBoundsChanged = () => { },
+      onRightClick = () => { },
+      onGetDataRange = () => { },
       onClosePane,
       onChangePane,
       onRemoveOverlay,
@@ -185,6 +187,7 @@ export const PlotContainer = forwardRef<
         decimalPlaces,
         positionDecimalPlaces,
         simple,
+        interaction,
         initialNumCandles,
         colors,
       )
@@ -315,6 +318,7 @@ export const PlotContainer = forwardRef<
                   overlays={overlays}
                   pane={pane}
                   simple={simple}
+                  interaction={interaction}
                   onClosePane={onClosePane}
                   onRemoveOverlay={onRemoveOverlay}
                 />
@@ -322,7 +326,7 @@ export const PlotContainer = forwardRef<
             );
           })}
         </Allotment>
-        <XAxisView ref={xAxisRef} simple={simple} />
+        <XAxisView ref={xAxisRef} simple={simple} interaction={interaction} />
       </d3fc-group>
     );
   },

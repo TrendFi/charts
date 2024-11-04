@@ -75,11 +75,24 @@ export function getBarConfig(
 ) {
   let base = 0;
 
+  // Custom handling for bars with no close value
+  // If we dont include this blank spaces show on the chart
+  if (d.close === undefined || d.close === null || d.close === 0) {
+    return {
+      x: d[x],
+      y: 0,
+      height: 0,
+      width: 0,
+      fill: '#ff0000',
+      stroke: '#ff0000',
+      lineWidth: 0,
+    };
+  }
+
   if (y2) {
     base = d[y2];
   }
 
-  const dColor = d.sell ? '#aa5fff' : d.buy ? '#aa5fff' : d.hold ? '#24FF00' : '#FF5252'
   const strokesWidth = stroke && lineWidth ? lineWidth * 2 * pixelsToTime : 0;
   const calculatedPadding = Math.min(
     width * innerPadding,
@@ -91,8 +104,8 @@ export function getBarConfig(
     y: Math.max(d[y] as number, base),
     height: Math.abs(base - (d[y] as number)),
     width: width - calculatedPadding,
-    fill: dColor,
-    stroke: 'transparent',
+    fill: fill,
+    stroke: stroke,
     lineWidth: lineWidth ?? 1,
   };
 }
@@ -108,17 +121,41 @@ export function getLineConfig(
     color: color,
   };
 }
-
 export function getRuleConfig(
   d: any,
+  buy: string,
+  sell: string,
   x: string,
   x2: string,
   y: string,
   y2: string,
+  stroke: string | null,
+  lineWidth: number | null,
   color: string | null,
+  innerPadding = PADDING_INNER,
+  maxPaddingInPixels = MAX_PADDING,
+  pixelsToTime = 1000,
+  dotWidth = 51840000,
 ) {
+
+  if (d.close === undefined || d.close === null || d.close === 0) {
+    return {
+      buy: buy,
+      sell: sell,
+      dotWidth: 0,
+      x: null,
+      x2: null,
+      y: null,
+      y2: null,
+      color: color,
+    };
+  }
+
   if (x === undefined) {
     return {
+      buy: buy,
+      sell: sell,
+      dotWidth: dotWidth,
       x: null,
       x2: null,
       y: d[y],
@@ -129,6 +166,9 @@ export function getRuleConfig(
 
   if (y === undefined) {
     return {
+      buy: buy,
+      sell: sell,
+      dotWidth: dotWidth,
       x: d[x],
       x2: x2 !== undefined ? d[x2] : null,
       y: null,
@@ -138,6 +178,9 @@ export function getRuleConfig(
   }
 
   return {
+    buy: buy,
+    sell: sell,
+    dotWidth: dotWidth,
     x: d[x],
     x2: x2 !== undefined ? d[x2] : null,
     y: d[y],

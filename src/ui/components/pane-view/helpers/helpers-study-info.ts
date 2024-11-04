@@ -49,7 +49,7 @@ export const studyInfoFields: Record<
       { id: "close", label: "C" },
       {
         id: "absoluteChange",
-        label: "Change",
+        label: "",
         format: (d, decimalPlaces) => {
           if (isNaN(d)) {
             return "-";
@@ -78,7 +78,7 @@ export const studyInfoFields: Record<
     fields: [
       { id: "close", label: "" },
       {
-        id: "percentageChangeData24",
+        id: "percentageChange",
         label: "",
         format: (d) => {
           if (isNaN(d)) {
@@ -179,8 +179,8 @@ export function getIntent(
     id: string;
     label: string;
     format?:
-      | ((d: any, decimalPlaces?: number | undefined) => string)
-      | undefined;
+    | ((d: any, decimalPlaces?: number | undefined) => string)
+    | undefined;
     intent?: boolean | undefined;
   },
   value: number,

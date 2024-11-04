@@ -104,6 +104,7 @@ export class Core {
   private isFreePan = false;
 
   private isSimple = false;
+  private interaction = false;
   private _colors: Colors;
 
   // Data
@@ -138,12 +139,14 @@ export class Core {
     decimalPlaces: number = 5,
     positionDecimalPlaces: number = 0,
     simple = false,
+    interaction = false,
     initialNumCandles = 24,
     colors: Colors,
   ) {
     this._decimalPlaces = decimalPlaces;
     this._positionDecimalPlaces = positionDecimalPlaces;
     this.isSimple = simple;
+    this.interaction = interaction;
     this.initialNumCandles = initialNumCandles;
     this._colors = colors;
 
@@ -459,7 +462,7 @@ export class Core {
     const latestPrice = panes["main"].data[panes["main"].data.length - 1].close;
 
     this.yAxes["main"].latestPrice(latestPrice);
-    this.plotAreas["main"].latestPrice(latestPrice);
+    // this.plotAreas["main"].latestPrice(latestPrice); this is the horizontal line
   }
 
   draw() {
@@ -591,22 +594,22 @@ export class Core {
 
     const date0 = new Date(
       latestDate.getTime() -
-        (Math.abs(
-          this.xScale.range()[1] -
-            this.xScale.range()[0] -
-            getCandlePadding(this.isSimple, intervalWidth),
-        ) /
-          intervalWidth) *
-          1000 *
-          60 *
-          getSubMinutes(this._interval, 1),
+      (Math.abs(
+        this.xScale.range()[1] -
+        this.xScale.range()[0] -
+        getCandlePadding(this.isSimple, intervalWidth),
+      ) /
+        intervalWidth) *
+      1000 *
+      60 *
+      getSubMinutes(this._interval, 1),
     );
 
     const domain = [
       date0,
       new Date(
         latestDate.getTime() +
-          (latestDate.getTime() - date0.getTime()) * (ratio - 1),
+        (latestDate.getTime() - date0.getTime()) * (ratio - 1),
       ),
     ];
 
@@ -886,7 +889,7 @@ export class Core {
     const latestPrice = panes["main"].data[panes["main"].data.length - 1].close;
 
     this.yAxes["main"].latestPrice(latestPrice);
-    this.plotAreas["main"].latestPrice(latestPrice);
+    // this.plotAreas["main"].latestPrice(latestPrice); this is the horizontal line
 
     // Ensure latest data is visible
     if (this.isPinned) {
@@ -903,7 +906,7 @@ export class Core {
     this.xElement.call(this.xZoom.scaleBy, 2 ** delta, [
       this.isPinned
         ? this.xScale.range()[1] -
-          getCandlePadding(this.isSimple, intervalWidth)
+        getCandlePadding(this.isSimple, intervalWidth)
         : (this.xScale.range()[0] + this.xScale.range()[1]) / 2,
       0,
     ]);

@@ -4,10 +4,11 @@ import { forwardRef } from "react";
 
 export type XAxisViewProps = {
   simple: boolean;
+  interaction: boolean;
 };
 
 export const XAxisView = forwardRef<HTMLDivElement, XAxisViewProps>(
-  ({ simple = false }, ref) => {
+  ({ simple = false, interaction = true }, ref) => {
     return (
       <div
         ref={ref}
@@ -18,7 +19,8 @@ export const XAxisView = forwardRef<HTMLDivElement, XAxisViewProps>(
         }}
       >
         <d3fc-canvas class="x-axis" use-device-pixel-ratio />
-        <d3fc-svg class="x-axis-interaction" />
+
+        {interaction ? <d3fc-svg class="x-axis-interaction" /> : null}
       </div>
     );
   },

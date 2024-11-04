@@ -5,5 +5,5 @@ export function getNumXTicks(size: number): number {
 }
 
 export function getNumYTicks(size: number): number {
-  return Math.max(MIN_NUM_TICKS, Math.abs(size) / 50);
+  return Math.max(MIN_NUM_TICKS, Math.abs(size) / 30);
 }

@@ -33,7 +33,7 @@ function addYAxisPath(
     ctx.lineTo(width - Y_AXIS_WIDTH, y + rectHeight / 2);
     ctx.closePath();
 
-    ctx.fillStyle = colors.backgroundSurface;
+    ctx.fillStyle = colors.tooltipLabel; // colors.backgroundSurface
     ctx.strokeStyle = colors.emphasis300;
     ctx.fill();
     ctx.stroke();

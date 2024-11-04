@@ -2,7 +2,6 @@ import { hex2rgb, string2hex } from "@ui/renderer";
 import { TICK_LABEL_FONT_SIZE, Y_AXIS_WIDTH } from "@util/constants";
 import { getNumYTicks } from "@util/misc";
 import { RenderableElement, ScaleLinear, ScaleTime } from "@util/types";
-
 import { Colors } from "../../feature/candlestick-chart/helpers";
 
 const MARGIN = 6;

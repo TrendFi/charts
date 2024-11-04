@@ -13,14 +13,14 @@ export const AXIS_HEIGHT = FONT_SIZE + 5;
  */
 export const AXIS_WIDTH = FONT_SIZE + 20;
 
-export const Y_AXIS_WIDTH = 54;
+export const Y_AXIS_WIDTH = 62;
 export const INITIAL_NUM_CANDLES_TO_DISPLAY = 250;
 export const INITIAL_NUM_CANDLES_TO_FETCH = 10000;
 export const DEFAULT_INTERVAL_WIDTH = 10;
 export const MIN_ZOOM = 0.1;
-export const MAX_ZOOM = 5;
+export const MAX_ZOOM = 3;
 export const LABEL_ANNOTATION_HEIGHT = 22;
-export const DATE_FORMAT = "MMM dd, yyyy";
+export const DATE_FORMAT = "MMM dd yyyy";
 
 // Axes
 export const MIN_NUM_TICKS = 3;

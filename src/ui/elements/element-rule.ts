@@ -3,9 +3,13 @@ import { PositionalElement, ScaleLinear, ScaleTime } from "@util/types";
 export type Rule = {
   points: [Date, number][];
   color: string;
+  dotWidth: number;
 };
 
 export class RuleElement implements PositionalElement {
+  readonly buy: boolean;
+  readonly sell: boolean;
+  readonly dotWidth: number;
   readonly x: Date;
   readonly x2: Date;
   readonly y: number;
@@ -13,8 +17,11 @@ export class RuleElement implements PositionalElement {
   readonly color: string;
 
   constructor(cfg: any) {
-    const { x, x2, y, y2, color } = cfg;
+    const { buy, sell, dotWidth, x, x2, y, y2, color } = cfg;
 
+    this.buy = buy;
+    this.sell = sell;
+    this.dotWidth = dotWidth;
     this.x = x;
     this.x2 = x2;
     this.y = y;
@@ -60,5 +67,26 @@ export class RuleElement implements PositionalElement {
     ctx.lineWidth = 2 / pixelRatio;
     ctx.stroke();
     ctx.closePath();
+
+    const pixelWidth = Math.max(xScale(this.dotWidth) - xScale(0), 3);
+
+    // Draw buy signal
+    if (this.buy) {
+      ctx.fillStyle = "#24FF00";
+      ctx.beginPath();
+      ctx.arc(x, y + 6, pixelWidth / 2, 0, Math.PI * 2, true);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Draw sell signal
+    if (this.sell) {
+      ctx.fillStyle = "#FF5252";
+      ctx.beginPath();
+      ctx.arc(x, y2 - 6, pixelWidth / 2, 0, Math.PI * 2, true);
+      ctx.closePath();
+      ctx.fill();
+    }
+
   }
 }
