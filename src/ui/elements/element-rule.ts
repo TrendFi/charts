@@ -9,6 +9,8 @@ export type Rule = {
 export class RuleElement implements PositionalElement {
   readonly buy: boolean;
   readonly sell: boolean;
+  readonly short: boolean;
+  readonly cover: boolean;
   readonly dotWidth: number;
   readonly x: Date;
   readonly x2: Date;
@@ -17,10 +19,12 @@ export class RuleElement implements PositionalElement {
   readonly color: string;
 
   constructor(cfg: any) {
-    const { buy, sell, dotWidth, x, x2, y, y2, color } = cfg;
+    const { buy, sell, short, cover, dotWidth, x, x2, y, y2, color } = cfg;
 
     this.buy = buy;
     this.sell = sell;
+    this.short = short;
+    this.cover = cover;
     this.dotWidth = dotWidth;
     this.x = x;
     this.x2 = x2;
@@ -82,6 +86,24 @@ export class RuleElement implements PositionalElement {
     // Draw sell signal
     if (this.sell) {
       ctx.fillStyle = "#FF5252";
+      ctx.beginPath();
+      ctx.arc(x, y2 - 6, pixelWidth / 2, 0, Math.PI * 2, true);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Draw short signal
+    if (this.short) {
+      ctx.fillStyle = "#a855f6";
+      ctx.beginPath();
+      ctx.arc(x, y + 6, pixelWidth / 2, 0, Math.PI * 2, true);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Draw cover signal
+    if (this.cover) {
+      ctx.fillStyle = "#FF2525";
       ctx.beginPath();
       ctx.arc(x, y2 - 6, pixelWidth / 2, 0, Math.PI * 2, true);
       ctx.closePath();

@@ -24,7 +24,7 @@ const Template: Story<CandlestickChartProps> = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  dataSource: new JsonDataSource("", 5),
+  // dataSource: new JsonDataSource("", 5),
   interval: Interval.I5M,
 };
 
@@ -69,7 +69,7 @@ Positions.args = {
 
 export const NoData = Template.bind({});
 NoData.args = {
-  dataSource: new EmptyDataSource(),
+  // dataSource: new EmptyDataSource(),
   interval: Interval.I5M,
   options: {
     notEnoughDataText: (
@@ -97,13 +97,13 @@ SimpleMode.args = {
 
 export const NoChange = Template.bind({});
 NoChange.args = {
-  dataSource: new JsonDataSource("", 5, "no-change-data.json", false),
+  // dataSource: new JsonDataSource("", 5, "no-change-data.json", false),
   interval: Interval.I1D,
 };
 
 export const ZeroVolumeCandles = Template.bind({});
 ZeroVolumeCandles.args = {
-  dataSource: new JsonDataSource("", 5, "zero-volume-candles-data.json", false),
+  // dataSource: new JsonDataSource("", 5, "zero-volume-candles-data.json", false),
   interval: Interval.I5M,
   options: {
     chartType: ChartType.OHLC,

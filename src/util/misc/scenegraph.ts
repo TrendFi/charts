@@ -125,6 +125,8 @@ export function getRuleConfig(
   d: any,
   buy: string,
   sell: string,
+  short: string,
+  cover: string,
   x: string,
   x2: string,
   y: string,
@@ -142,6 +144,8 @@ export function getRuleConfig(
     return {
       buy: buy,
       sell: sell,
+      short: short,
+      cover: cover,
       dotWidth: 0,
       x: null,
       x2: null,
@@ -155,6 +159,8 @@ export function getRuleConfig(
     return {
       buy: buy,
       sell: sell,
+      short: short,
+      cover: cover,
       dotWidth: dotWidth,
       x: null,
       x2: null,
@@ -168,6 +174,8 @@ export function getRuleConfig(
     return {
       buy: buy,
       sell: sell,
+      short: short,
+      cover: cover,
       dotWidth: dotWidth,
       x: d[x],
       x2: x2 !== undefined ? d[x2] : null,
@@ -180,6 +188,8 @@ export function getRuleConfig(
   return {
     buy: buy,
     sell: sell,
+    short: short,
+    cover: cover,
     dotWidth: dotWidth,
     x: d[x],
     x2: x2 !== undefined ? d[x2] : null,
