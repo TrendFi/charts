@@ -85,7 +85,7 @@ export class RuleElement implements PositionalElement {
 
     // Draw sell signal
     if (this.sell) {
-      ctx.fillStyle = "#000000";
+      ctx.fillStyle = "#FFFFFF";
       ctx.beginPath();
       ctx.arc(x, y2 - 6, pixelWidth / 2, 0, Math.PI * 2, true);
       ctx.closePath();
