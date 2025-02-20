@@ -92,7 +92,7 @@ function compileLayer(
 
   return data?.values?.map((d: any) => {
     let cfg = {};
-    const dColor = d.sell ? '#FF5252' : d.buy ? '#24FF00' : d.short ? '#a855f6' : d.cover ? '#FF2525' : d.hold ? '#24FF00' : d.hold_short ? '#a855f6' : '#FF5252'
+    const dColor = d.sell ? '#000000' : d.buy ? '#24FF00' : d.short ? '#a855f6' : d.cover ? '#FF2525' : d.hold ? '#24FF00' : d.hold_short ? '#a855f6' : '#000000'
 
     if (markType === "bar") {
       cfg = getBarConfig(
